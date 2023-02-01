@@ -2,6 +2,6 @@
 {
     public class AlertConstant
     {
-        public static string ClientAPIUrl { get; set; }
+        public static string? ClientAPIUrl { get; set; }
     }
 }

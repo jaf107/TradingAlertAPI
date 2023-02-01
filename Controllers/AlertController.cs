@@ -24,8 +24,7 @@ namespace TradingAlertAPI.Controllers
             try
             {
                 sw = new StreamWriter("AlertDetails.txt", true);
-                //await sw.WriteLineAsync(DateTime.Now +" , " + apiItem);
-
+                
                 await sw.WriteLineAsync(DateTime.Now + " , " + reqBody);
 
                 new AlertService().AlertAPIService(reqBody);
