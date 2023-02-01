@@ -21,7 +21,7 @@ namespace TradingAlertAPI.Services
 
             client.DefaultRequestHeaders.Add("CallerToken", token);
 
-            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _currentTime + "," + message).Result;
+            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _currentTime + "||" + message).Result;
 
             var strResponse = httpResponse.Content.ReadAsStringAsync().Result;
 
