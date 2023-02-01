@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using TradingAlertAPI.Services;
 
@@ -27,7 +26,7 @@ namespace TradingAlertAPI.Controllers
                 
                 await sw.WriteLineAsync(DateTime.Now + " , " + reqBody);
 
-                new AlertService().AlertAPIService(reqBody);
+                new AlertService().CallExternalAPI(reqBody);
 
             }
             catch (IOException ex)
