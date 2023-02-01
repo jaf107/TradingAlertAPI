@@ -10,7 +10,10 @@ namespace TradingAlertAPI.Services
 
         public void CallExternalAPI(string message)
         {
-            //string headerValue = req.Headers["validator"];
+            var timeUtc = DateTime.UtcNow;
+            TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, easternZone);
+
 
             using HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Clear();
@@ -21,7 +24,7 @@ namespace TradingAlertAPI.Services
 
             client.DefaultRequestHeaders.Add("CallerToken", token);
 
-            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _currentTime + "||" + message).Result;
+            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, easternTime + "||" + message).Result;
 
             var strResponse = httpResponse.Content.ReadAsStringAsync().Result;
 
