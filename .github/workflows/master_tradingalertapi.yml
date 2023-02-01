@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'TradingAlertAPI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_013EAADF3185481B8BC9C90A6A468E85 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EAC1FEA4EDB64D2FBA93D4EBD1CC6B9F }}
           package: .
