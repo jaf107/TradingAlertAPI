@@ -23,9 +23,7 @@ namespace TradingAlertAPI.Controllers
             try
             {
                 sw = new StreamWriter("AlertDetails.txt", true);
-                
                 await sw.WriteLineAsync(DateTime.Now + " , " + reqBody);
-
                 new AlertService().CallExternalAPI(reqBody);
 
             }
@@ -50,7 +48,7 @@ namespace TradingAlertAPI.Controllers
         [HttpGet("/getversion", Name = "GetVersion")]
         public string GetVersion()
         {
-            return "1.0";
+            return "1.1";
         }
     }
 }
