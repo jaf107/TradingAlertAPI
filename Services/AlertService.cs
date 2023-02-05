@@ -28,11 +28,11 @@ namespace TradingAlertAPI.Services
             client.DefaultRequestHeaders.Add("CallerToken", token);
 
             //var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _easternTime + "||" + message).Result;
-            AlertModel alertModel = new AlertModel()
+            AlertModel alert= new AlertModel()
             {
                 Message = _easternTime + "||" + message,
             };
-            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, alertModel).Result;
+            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, alert).Result;
 
 
             var strResponse = httpResponse.Content.ReadAsStringAsync().Result;
