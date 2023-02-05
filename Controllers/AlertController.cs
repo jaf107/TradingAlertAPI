@@ -53,7 +53,7 @@ namespace TradingAlertAPI.Controllers
         [HttpGet("/getversion", Name = "GetVersion")]
         public string GetVersion()
         {
-            return "1.1";
+            return "1.2";
         }
     }
 }
