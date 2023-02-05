@@ -7,35 +7,26 @@ namespace TradingAlertAPI.Services
 {
     public class AlertService
     {
-        private readonly string _currentTime = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-
-        public void CallExternalAPI(string message)
+        public void CallExternalAPI(string easternTime, string message)
         {
-            var timeUtc = DateTime.UtcNow;
-            TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, easternZone);
-
-            string _easternTime = easternTime.ToString(CultureInfo.InvariantCulture);
-
-
+            // Initiate HTTPClient
             using HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Clear();
 
-            // Create Token
-            List<string> xorStrList = new List<string>(new[] { _easternTime, message });
-            string token = PerformXOR(xorStrList);
+            // Create Token (Perform XOR for Security)
+            List<String> xorStrList = new List<String>(new[] { easternTime, message });
+            String token = PerformXOR(xorStrList);
 
             client.DefaultRequestHeaders.Add("CallerToken", token);
-
-            //var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _easternTime + "||" + message).Result;
+            
+            // Send to Executor API
             AlertModel alert= new AlertModel()
             {
-                TimeAndMessage = _easternTime + "||" + message,
+                TimeAndMessage = easternTime + "||" + message,
                 Message = message,
             };
             var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, alert).Result;
-
-
+            
             var strResponse = httpResponse.Content.ReadAsStringAsync().Result;
 
             Console.WriteLine(strResponse);
