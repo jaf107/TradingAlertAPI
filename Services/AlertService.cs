@@ -30,7 +30,8 @@ namespace TradingAlertAPI.Services
             //var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _easternTime + "||" + message).Result;
             AlertModel alert= new AlertModel()
             {
-                Message = _easternTime + "||" + message,
+                TimeAndMessage = _easternTime + "||" + message,
+                Message = message,
             };
             var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, alert).Result;
 

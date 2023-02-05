@@ -1,6 +1,0 @@
-1/2/2023 2:38:53 PM , An invalid request URI was provided. Either the request URI must be an absolute URI or BaseAddress must be set.
-1/2/2023 5:17:07 PM , One or more errors occurred. (An error occurred while sending the request.)
-1/2/2023 5:20:12 PM , The process cannot access the file 'C:\Users\jafar\source\repos\TradingAlertAPI\AlertDetails.txt' because it is being used by another process.
-1/2/2023 5:22:04 PM , One or more errors occurred. (An error occurred while sending the request.)
-1/2/2023 5:25:58 PM , One or more errors occurred. (An error occurred while sending the request.)
-1/2/2023 5:27:59 PM , One or more errors occurred. (An error occurred while sending the request.)
