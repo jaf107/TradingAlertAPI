@@ -13,8 +13,6 @@ namespace TradingAlertAPI.Controllers
         [HttpPost("/receivealert", Name = "ReceiveAlert")]
         public async Task<string> ReceiveAlert()
         {
-            //StreamWriter? sw1 = null;
-            //StreamWriter? sw2 = null;
             StreamWriter sw1 = new StreamWriter("AlertDetails.txt", true);
             StreamWriter sw2 = new StreamWriter("AlertErrors.txt", true);
             var req = Request;
