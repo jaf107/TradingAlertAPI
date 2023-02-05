@@ -22,8 +22,7 @@ namespace TradingAlertAPI.Services
             // Send to Executor API
             AlertModel alert= new AlertModel()
             {
-                TimeAndMessage = easternTime + "||" + message,
-                Message = message,
+                TimeAndMessage = easternTime + "||" + message
             };
             var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, alert).Result;
             
