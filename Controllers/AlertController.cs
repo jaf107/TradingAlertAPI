@@ -13,7 +13,8 @@ namespace TradingAlertAPI.Controllers
         [HttpPost("/receivealert", Name = "ReceiveAlert")]
         public async Task<string> ReceiveAlert()
         {
-            StreamWriter? sw = null;
+            StreamWriter? sw1 = null;
+            StreamWriter? sw2 = null;
             var req = Request;
             
             // Read req body and write to file
@@ -21,24 +22,25 @@ namespace TradingAlertAPI.Controllers
             string reqBody = await streamReader.ReadToEndAsync();
             try
             {
-                sw = new StreamWriter("AlertDetails.txt", true);
-                await sw.WriteLineAsync(DateTime.Now + " , " + reqBody);
+                sw1 = new StreamWriter("AlertDetails.txt", true);
+                await sw1.WriteLineAsync(DateTime.Now + " , " + reqBody);
                 new AlertService().CallExternalAPI(reqBody);
 
             }
             catch (IOException ex)
             {
-                sw = new StreamWriter("AlertErrors.txt", true);
-                await sw.WriteLineAsync(DateTime.Now + " , " + ex.Message);
+                sw2 = new StreamWriter("AlertErrors.txt", true);
+                await sw2.WriteLineAsync(DateTime.Now + " , " + ex.Message);
             }
             catch (Exception ex)
             {
-                sw = new StreamWriter("AlertErrors.txt", true);
-                await sw.WriteLineAsync(DateTime.Now + " , " + ex.Message);
+                sw2 = new StreamWriter("AlertErrors.txt", true);
+                await sw2.WriteLineAsync(DateTime.Now + " , " + ex.Message);
             }
             finally
             {
-                await sw!.DisposeAsync();
+                await sw1!.DisposeAsync();
+                await sw2!.DisposeAsync();
             }
 
             return SuccessCode;
