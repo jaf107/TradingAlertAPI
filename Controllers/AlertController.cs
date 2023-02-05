@@ -15,9 +15,8 @@ namespace TradingAlertAPI.Controllers
         {
             StreamWriter? sw = null;
             var req = Request;
-
-
-
+            
+            // Read req body and write to file
             StreamReader streamReader = new StreamReader(req.Body, Encoding.UTF8);
             string reqBody = await streamReader.ReadToEndAsync();
             try
