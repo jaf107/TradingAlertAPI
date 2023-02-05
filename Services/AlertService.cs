@@ -14,17 +14,19 @@ namespace TradingAlertAPI.Services
             TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
             DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, easternZone);
 
+            string _easternTime = easternTime.ToString(CultureInfo.InvariantCulture);
+
 
             using HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Clear();
 
             // Create Token
-            List<string> xorStrList = new List<string>(new[] { _currentTime, message });
+            List<string> xorStrList = new List<string>(new[] { _easternTime, message });
             string token = PerformXOR(xorStrList);
 
             client.DefaultRequestHeaders.Add("CallerToken", token);
 
-            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, easternTime + "||" + message).Result;
+            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _easternTime + "||" + message).Result;
 
             var strResponse = httpResponse.Content.ReadAsStringAsync().Result;
 
