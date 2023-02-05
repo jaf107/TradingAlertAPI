@@ -13,8 +13,10 @@ namespace TradingAlertAPI.Controllers
         [HttpPost("/receivealert", Name = "ReceiveAlert")]
         public async Task<string> ReceiveAlert()
         {
-            StreamWriter? sw1 = null;
-            StreamWriter? sw2 = null;
+            //StreamWriter? sw1 = null;
+            //StreamWriter? sw2 = null;
+            StreamWriter sw1 = new StreamWriter("AlertDetails.txt", true);
+            StreamWriter sw2 = new StreamWriter("AlertErrors.txt", true);
             var req = Request;
 
             var timeUtc = DateTime.UtcNow;
@@ -27,19 +29,16 @@ namespace TradingAlertAPI.Controllers
             string reqBody = await streamReader.ReadToEndAsync();
             try
             {
-                sw1 = new StreamWriter("AlertDetails.txt", true);
                 await sw1.WriteLineAsync(easternTime + " , " + reqBody);
                 new AlertService().CallExternalAPI(reqBody);
 
             }
             catch (IOException ex)
             {
-                sw2 = new StreamWriter("AlertErrors.txt", true);
                 await sw2.WriteLineAsync(easternTime+ " , " + ex.Message);
             }
             catch (Exception ex)
             {
-                sw2 = new StreamWriter("AlertErrors.txt", true);
                 await sw2.WriteLineAsync(easternTime + " , " + ex.Message);
             }
             finally
