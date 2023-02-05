@@ -1,6 +1,7 @@
 ﻿using TradingAlertAPI.Constants;
 using System.Globalization;
 using System.Text;
+using TradingAlertAPI.Models;
 
 namespace TradingAlertAPI.Services
 {
@@ -26,7 +27,13 @@ namespace TradingAlertAPI.Services
 
             client.DefaultRequestHeaders.Add("CallerToken", token);
 
-            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _easternTime + "||" + message).Result;
+            //var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, _easternTime + "||" + message).Result;
+            AlertModel alertModel = new AlertModel()
+            {
+                Message = _easternTime + "||" + message,
+            };
+            var httpResponse = client.PostAsJsonAsync(AlertConstant.ClientAPIUrl, alertModel).Result;
+
 
             var strResponse = httpResponse.Content.ReadAsStringAsync().Result;
 
